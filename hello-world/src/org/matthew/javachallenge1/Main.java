@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
     private static ArrayList<Contact> contacts;
     private static Scanner scanner;
+    private static int id = 0;
     public static void main(String[] args) {
         boolean quit_loop = false;
         contacts = new ArrayList<>();
@@ -180,6 +181,17 @@ public class Main {
             if (doesExist) {
                 System.out.println("Enter your message");
                 String message = scanner.next();
+                id++;
+                Message newMessage = new Message(message,id);
+                if (i.getName().equals(name)) {
+                    ArrayList<Message> newMessages = i.getMessages();
+                    newMessages.add(newMessage);
+                    Contact currentContact = i;
+                    currentContact.setMessages(newMessages);
+                    contacts.remove(i);
+                    contacts.add(currentContact);
+
+                }
                 System.out.println(message + " sent to " + recipient.getName() + " " + recipient.getPhone_no());
             } else {
                 System.out.println("Recipient doesn't exist");
